@@ -5,11 +5,11 @@
         <meta name="author" content="Menci">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">      
         <title>滋磁问卷</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css">
+        <link rel="stylesheet" href="semantic-ui/dist/semantic.min.css">
         <link rel="stylesheet" href="index.css">
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+        <script src="jquery.min.js"></script>
         <script>
-            var userProfile = <%- userProfile %>, userProfileToken = <%- userProfileToken %>, loginError = <%- loginError %>;
+            var userProfile = <%- userProfile %>, userProfileToken = <%- userProfileToken %>, loginError = <%- loginError %>, oauthClientID = "<%- oauthClientID %>";
         </script>
     </head>
     <body>
@@ -198,7 +198,7 @@
                 </div>
             </form>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>
+        <script src="semantic-ui/dist/semantic.min.js"></script>
         <script src="index.js"></script>
         <div class="ui vertical footer segment" style="margin-top: -10px; ">
             <div class="ui center aligned container">

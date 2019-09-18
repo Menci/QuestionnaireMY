@@ -66,7 +66,8 @@ router.get("/", async ctx => {
     await ctx.render("index", {
         loginError: SerializeJS(loginError),
         userProfile: SerializeJS(userProfile),
-        userProfileToken: SerializeJS(userProfileToken)
+        userProfileToken: SerializeJS(userProfileToken),
+        oauthClientID: config.OAUTH2_CLIENT_ID
     });
 });
 

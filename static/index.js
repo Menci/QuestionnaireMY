@@ -38,7 +38,7 @@ $(function() {
   });
   
   if (userProfile === null) {
-    $(".login_button").attr("href", "https://v.ruc.edu.cn/oauth2/authorize?response_type=code&scope=profile&state=cRAKIOI&client_id=5bdfb3e690f4d148421bc4ad.ruc&redirect_uri=" + location.href);
+    $(".login_button").attr("href", "https://v.ruc.edu.cn/oauth2/authorize?response_type=code&scope=profile&state=cRAKIOI&client_id=" + oauthClientID + "&redirect_uri=" + location.href);
     if (loginError === null) {
       $("#login-modal").modal("show");
     } else {
@@ -91,14 +91,8 @@ function encodeForm() {
 }
 
 function getError(o) {
-  if (o.name === "") {
-    return "请输入姓名。";
-  } else if (o.wechat_id === "") {
+  if (o.wechat_id === "") {
     return "请输入微信号。";
-  } else if (o.student_id.length !== 10) {
-    return "请输入正确的学号。";
-  } else if (o.school === "") {
-    return "请选择学院。";
   } else if (o.willing.reduce(function (s, x) { return s + parseInt(x) }, 0) !== 20) {
     return "请正确分配部门意愿的愿望点。";
   }
