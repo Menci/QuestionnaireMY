@@ -1,0 +1,93 @@
+.ui.header,
+.ui.button,
+.ui.input input,
+.ui.menu,
+.ui.form input:not([type]),
+.ui.form input[type=date],
+.ui.form input[type=datetime-local],
+.ui.form input[type=email],
+.ui.form input[type=file],
+.ui.form input[type=number],
+.ui.form input[type=password],
+.ui.form input[type=search],
+.ui.form input[type=tel],
+.ui.form input[type=text],
+.ui.form input[type=time],
+.ui.form input[type=url],
+h1,
+h2,
+h3,
+h4,
+h5,
+body
+ {
+  font-family:
+    Lato,
+    -apple-system,
+    'PingFang SC',/* Apple */
+    'Source Han Sans SC',
+    'Noto Sans CJK SC', /* Google */
+    'Microsoft Yahei',
+    'Lantinghei SC',
+    'Hiragino Sans GB',
+    'Microsoft Sans Serif', /* M$ */
+    'WenQuanYi Micro Hei', /* *nix */
+    sans-serif;
+}
+
+.monospace-font {
+    font-family: 'Roboto Mono', 'Ubuntu Mono', 'Menlo', 'Consolas', monospace;
+}
+
+#department_willing .ui.input input {
+    text-align: center;
+    width: 60px !important;
+    padding: 2px !important;
+    font-size: 18px;
+}
+
+#department_willing .ui.input div[data-action="increase"] {
+    margin-left: 3px;
+}
+
+#department_willing .inline.field > label {
+    font-weight: normal !important;
+    width: 50% !important;
+    max-width: 160px !important;
+}
+
+@media screen and (max-width: 767px) {
+    #department_willing .inline.field .ui.progress {
+        display: none;
+    }
+}
+
+#department_willing .inline.field .ui.progress {
+    background: rgba(128, 128, 128, 0.1) !important;
+    width: 409px !important;
+    margin-left: 60px !important;
+    margin-top: 4px !important;
+    margin-bottom: 4px !important;
+}
+
+#department_willing .inline.field .ui.progress > .bar {
+    height: 100%;
+    min-width: 0 !important;
+    background-color: #767676 !important;
+}
+
+#department_willing .inline.field .ui.progress > .bar.green {
+    background-color: #21ba45 !important;
+}
+
+#department_willing .ui.input {
+    zoom: 0.7;
+}
+
+#department_willing .inline.field {
+    white-space: nowrap;
+}
+
+#department_willing_help {
+    vertical-align: bottom;
+}

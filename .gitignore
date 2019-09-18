@@ -1,3 +1,6 @@
+*.db
+config.ts
+
 # Logs
 logs
 *.log

@@ -1,0 +1,209 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Menci">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">      
+        <title>滋磁问卷</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.css">
+        <link rel="stylesheet" href="index.css">
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+        <script>
+            var userProfile = <%- userProfile %>, userProfileToken = <%- userProfileToken %>, loginError = <%- loginError %>;
+        </script>
+    </head>
+    <body>
+        <div id="login-modal" class="ui tiny modal">
+            <div class="header">
+                提示
+            </div>
+            <div class="content">
+                <p>请登录微人大账号后使用。</p>
+            </div>
+            <div class="actions">
+                <a class="ui positive button login_button" href="#">
+                    登录
+                    <i class="right chevron icon"></i>
+                </a>
+            </div>
+        </div>
+        <div id="login-error-modal" class="ui modal">
+            <div class="header">
+                登录错误
+            </div>
+            <div class="content">
+                <p id="login-error" style="white-space: pre; " class="monospace-font"></p>
+            </div>
+            <div class="actions">
+                <a class="ui positive button login_button" href="#">
+                    重新登录
+                    <i class="right chevron icon"></i>
+                </a>
+            </div>
+        </div>
+        <div id="error-modal" class="ui modal">
+            <div class="header">
+                错误
+            </div>
+            <div class="content">
+                <p id="error-message" style="white-space: pre; " class="monospace-font"></p>
+            </div>
+            <div class="actions">
+                <div class="ui positive approve button" onclick="$('#error-modal').modal('hide');">
+                    返回
+                    <i class="right chevron icon"></i>
+                </div>
+            </div>
+        </div>
+        <div class="ui raised very padded text container segment" style="margin-top: 14px; ">
+            <h1 class="ui header">滋磁问卷</h2>
+            <div class="ui visible message" style="font-size: 0.8em; ">
+                <p>这么早就说要选部门，会不会有一种内定、硬点的感觉呢？</p>
+            </div>
+            <form class="ui form">
+                <div class="field">
+                    <label>姓名</label>
+                    <input type="text" readonly name="name">
+                </div>
+                <div class="field">
+                    <label>微信号</label>
+                    <input type="text" name="wechat_id">
+                </div>
+                <div class="field">
+                    <label>学号</label>
+                    <input type="text" readonly name="student_id">
+                </div>
+                <div class="field">
+                    <label>学院</label>
+                    <input type="text" readonly name="school">
+                    <!-- <select class="ui search dropdown" name="school">
+                        <option value="">选择学院 ……</option>
+                        <option value="信息学院">信息学院</option>
+                        <option value="信息资源管理学院">信息资源管理学院</option>
+                        <option value="中法学院">中法学院</option>
+                        <option value="公共管理学院">公共管理学院</option>
+                        <option value="农业与农村发展学院">农业与农村发展学院</option>
+                        <option value="劳动人事学院">劳动人事学院</option>
+                        <option value="历史学院">历史学院</option>
+                        <option value="哲学院">哲学院</option>
+                        <option value="商学院">商学院</option>
+                        <option value="国学院">国学院</option>
+                        <option value="国际关系学院">国际关系学院</option>
+                        <option value="国际学院">国际学院</option>
+                        <option value="培训学院">培训学院</option>
+                        <option value="外国语学院">外国语学院</option>
+                        <option value="教育学院">教育学院</option>
+                        <option value="文学院">文学院</option>
+                        <option value="新闻学院">新闻学院</option>
+                        <option value="法学院">法学院</option>
+                        <option value="环境学院">环境学院</option>
+                        <option value="理学院">理学院</option>
+                        <option value="研究生院">研究生院</option>
+                        <option value="社会与人口学院">社会与人口学院</option>
+                        <option value="经济学院">经济学院</option>
+                        <option value="统计学院">统计学院</option>
+                        <option value="继续教育学院">继续教育学院</option>
+                        <option value="艺术学院">艺术学院</option>
+                        <option value="财政金融学院">财政金融学院</option>
+                        <option value="马克思主义学院">马克思主义学院</option>
+                    </select> -->
+                </div>
+                <div class="grouped fields" id="department_willing">
+                    <label>
+                        部门意愿
+                        <i id="department_willing_help" class="small circular question mark icon link" data-content="你共有 20 个愿望点可供分配，分配给某一项的愿望点越多，表示你对此选项的愿望越强烈。"></i>
+                    </label>
+                    <div class="inline field">
+                        <label>项目部（含原外联部）</label>
+                        <div class="ui input" data-index="1">
+                            <div data-action="decrease" class="ui basic circular icon button"><i class="minus icon"></i></div>
+                            <input readonly type="text" value="0" name="willing" data-department="项目部（含原外联部）">
+                            <div data-action="increase" class="ui basic circular icon button"><i class="plus icon"></i></div>
+                            <div class="ui grey progress"><div class="bar"></div></div>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <label>宣传部</label>
+                        <div class="ui input" data-index="2">
+                            <div data-action="decrease" class="ui basic circular icon button"><i class="minus icon"></i></div>
+                            <input readonly type="text" value="0" name="willing" data-department="宣传部">
+                            <div data-action="increase" class="ui basic circular icon button"><i class="plus icon"></i></div>
+                            <div class="ui grey progress"><div class="bar"></div></div>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <label>技术部</label>
+                        <div class="ui input" data-index="3">
+                            <div data-action="decrease" class="ui basic circular icon button"><i class="minus icon"></i></div>
+                            <input readonly type="text" value="0" name="willing" data-department="技术部">
+                            <div data-action="increase" class="ui basic circular icon button"><i class="plus icon"></i></div>
+                            <div class="ui grey progress"><div class="bar"></div></div>
+                        </div>
+                    </div>
+                    <div class="inline field">
+                        <label>电竞部</label>
+                        <div class="ui input" data-index="4">
+                            <div data-action="decrease" class="ui basic circular icon button"><i class="minus icon"></i></div>
+                            <input readonly type="text" value="0" name="willing" data-department="电竞部">
+                            <div data-action="increase" class="ui basic circular icon button"><i class="plus icon"></i></div>
+                            <div class="ui grey progress"><div class="bar"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>是否有加入极客沙龙做编程项目的意愿？</label>
+                    <textarea name="programming" rows="4"></textarea>
+                </div>
+                <div class="field">
+                    <label>希望在计协学到什么？</label>
+                    <textarea name="wtf_to_learn" rows="4"></textarea>
+                </div>
+                <div class="grouped fields">
+                    <label>你想和我们一起玩的游戏有 ……</label>
+                    <div class="field">
+                        <div class="ui checkbox">
+                        <input type="checkbox" name="game" tabindex="0" class="hidden" value="hearthstone">
+                        <label>炉石传说</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                        <input type="checkbox" name="game" tabindex="0" class="hidden" value="mahjong">
+                        <label>雀魂</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                        <input type="checkbox" name="game" tabindex="0" class="hidden" value="ffxiv">
+                        <label>最终幻想 14</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                        <input type="checkbox" name="game" tabindex="0" class="hidden" value="rts">
+                        <label>星际争霸、红色警戒等 RTS 类游戏</label>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <div class="ui checkbox">
+                        <input type="checkbox" name="game" tabindex="0" class="hidden" value="moba">
+                        <label>英雄联盟、王者荣耀、DotA 2 等 MOBA 类游戏</label>
+                        </div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-bottom: -25px; margin-top: 20px; ">
+                    <button class="ui button" id="submit">
+                        提交
+                    </button>
+                </div>
+            </form>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2/dist/semantic.min.js"></script>
+        <script src="index.js"></script>
+        <div class="ui vertical footer segment" style="margin-top: -10px; ">
+            <div class="ui center aligned container">
+                <span style="color: #999;"><a href="https://github.com/Menci/QuestionnaireMY">QuestionnaireMY</a> by Menci & ceerRep.</span>
+            </div>
+        </div>
+    </body>
+</html>
